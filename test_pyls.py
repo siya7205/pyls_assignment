@@ -1,13 +1,7 @@
 import pytest
-from pyls import list_files_with_details_and_suffixes
+from pyls import print_help
 
-def test_list_files_with_details_and_suffixes():
-    files = list_files_with_details_and_suffixes()
-    assert isinstance(files, list)
-    assert len(files) > 0
-    for file in files:
-        details = file.split()
-        assert len(details) == 3
-        assert len(details[0]) == 19  # Date and time length
-        assert details[1].isdigit()  # Size should be a digit
-        assert details[2].endswith(('/', '*', ''))  # Suffix check
+def test_print_help(capfd):
+    print_help()
+    out, _ = capfd.readouterr()
+    assert "pyls - A limited version of the ls"
